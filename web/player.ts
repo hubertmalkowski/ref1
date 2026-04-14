@@ -18,6 +18,10 @@ async function main() {
   canvas.style.display = 'block';
   document.body.appendChild(canvas);
 
+  document.addEventListener('click', () => {
+    presenter.resume();
+  });
+
   document.addEventListener('keydown', (e) => {
     switch (e.key) {
       case 'ArrowRight':
