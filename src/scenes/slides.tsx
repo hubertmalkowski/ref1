@@ -1,5 +1,5 @@
 import { Code, Img, Latex, Layout, Txt } from '@motion-canvas/2d';
-import { beginSlide, createRef, fadeTransition, waitFor, map, tween, all, easeInBack, easeOutCirc, easeOutCubic } from '@motion-canvas/core';
+import { beginSlide, createRef, fadeTransition, waitFor, map, tween, all, easeInBack, easeOutCirc, easeOutCubic, loop } from '@motion-canvas/core';
 import { makeSlide } from './makeSlide';
 
 
@@ -165,6 +165,175 @@ export const lambda1 = makeSlide(null, function* (view) {
 })
 
 export const lambda2 = makeSlide(null, function* (view) {
+  const apply = createRef<Latex>()
+  const result = createRef<Latex>()
 
+  view.add(
+    <>
+
+      <Latex
+        ref={apply}
+        tex="{{\text{apply}}} = {{\lambda f.}} {{\lambda x.}} {{f}}\ {{x}}"
+        fill="black"
+        fontSize={70}
+      />
+
+      <Latex
+        ref={result}
+        tex="\text{apply}\ (\lambda n.n^2+1)\ 2 \rightsquigarrow 5"
+        fill="black"
+        fontSize={70}
+        position={[0, 100]}
+        opacity={0}
+      />
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("lambda2.1")
+
+  yield* apply().tex("{{(}} {{\\lambda f.}} {{\\lambda x.}} {{f}}\\ {{x}} {{)\\ }} {{(}}{{\\lambda n.}} {{n}}{{^2 + 1}}{{)}}\\", 1)
+
+  yield* beginSlide("lambda2.2")
+
+  yield* apply().tex("{{(}} {{\\lambda x.}} {{(}}{{\\lambda n.}} {{n}}{{^2 + 1}}{{)}}\\ {{x}} {{)\\ }} ", 1)
+
+  yield* beginSlide("lambda2.3")
+
+  yield* apply().tex("{{(}} {{\\lambda x.}} {{(}}{{\\lambda n.}} {{n}}{{^2 + 1}}{{)}}\\ {{x}} {{)\\ }} {{2}} ", 1)
+  yield* apply().tex(" {{(}}{{\\lambda n.}} {{n}}{{^2 + 1}}{{)}}\\ {{2}} ", 1)
+  yield* apply().tex(" {{2}}{{^2 + 1}}", 1)
+  yield* apply().tex(" {{2}}{{^2 + 1}}{{\\rightsquigarrow 5}}", 1)
+  yield* beginSlide("lambda2.4")
+
+  yield* apply().tex("{{\\text{apply}}} = {{\\lambda f.}} {{\\lambda x.}} {{f}}\ {{x}}", 1)
+  yield* all(
+    result().opacity(100, 0.5),
+    apply().y(0, 0).to(-100, 0.5),
+  )
+  yield* beginSlide("lambda2.5")
+})
+
+
+export const omega = makeSlide(null, function* (view) {
+
+  const func = createRef<Latex>()
+  // const lambda = createRef<Latex>()
+  // const app = createRef<Latex>()
+  //
+  view.add(
+    <>
+      <Latex
+        ref={func}
+        tex="{{(\lambda x.}} {{x}}\ {{x}}{{)}}\ {{(\lambda x. x\ x)}}"
+        fill="black"
+        fontSize={70}
+      />
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("omega.0")
+
+  yield* func().tex("{{(\\lambda x.}} {{x}}\\ {{x}}{{)}}\\ {{(\\lambda x. x\\ x)}}", 0).to("{{(\\lambda x.}} {{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}{{)}}", 1.2).to("{{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}", 0.4)
+  yield* func().tex("{{(\\lambda x.}} {{x}}\\ {{x}}{{)}}\\ {{(\\lambda x. x\\ x)}}", 0).to("{{(\\lambda x.}} {{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}{{)}}", 1.2).to("{{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}", 0.4)
+  yield* func().tex("{{(\\lambda x.}} {{x}}\\ {{x}}{{)}}\\ {{(\\lambda x. x\\ x)}}", 0).to("{{(\\lambda x.}} {{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}{{)}}", 1.2).to("{{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}", 0.4)
+  yield* func().tex("{{(\\lambda x.}} {{x}}\\ {{x}}{{)}}\\ {{(\\lambda x. x\\ x)}}", 0).to("{{(\\lambda x.}} {{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}{{)}}", 1.2).to("{{(\\lambda x. x\\ x)}}\\ {{(\\lambda x. x\\ x)}}", 0.4)
+
+
+})
+
+export const stlc1 = makeSlide(null, function* (view) {
+  const func = createRef<Latex>()
+
+  view.add(
+    <>
+      <Latex
+        ref={func}
+        tex="{{\lambda\ }} {{x}}{{.x^2 + 1}}"
+        fill="black"
+        fontSize={70}
+      />
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("stlc1.1")
+
+  yield* func().tex("{{ \\lambda\\ }} {{x}}{{:\\text{Nat}\\ }}{{.x^2 + 1}}", 1)
+  yield* beginSlide("stlc1.2")
+})
+
+
+
+export const stlc2 = makeSlide(null, function* (view) {
+
+  const arrow = createRef<Latex>()
+
+
+  view.add(
+    <>
+      <Latex
+        tex="\text{Int},\ \text{Bool},\ \text{Nat},\ \text{B},\ \text{A} \dots"
+        fill="black"
+        fontSize={70}
+        position={[0, -100]}
+      />
+
+
+      <Latex
+        ref={arrow}
+        tex="A \rightarrow B"
+        fill="black"
+        fontSize={70}
+        position={[0, 100]}
+        opacity={0}
+      />
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("stlc2.1")
+
+  yield* arrow().opacity(100, 1)
+
+
+
+  yield* beginSlide("stlc2.2")
+})
+
+
+
+
+
+export const stlc3 = makeSlide(null, function* (view) {
+  const expr1 = createRef<Latex>()
+  const expr2 = createRef<Latex>()
+  const expr3 = createRef<Latex>()
+  const expr4 = createRef<Latex>()
+
+  view.add(
+    <Layout direction="column" alignItems="center" gap={60} layout>
+      <Latex ref={expr1} tex="{{5}}" fill="black" fontSize={60} />
+      <Latex ref={expr2} tex="{{F = \lambda\ x : \text{Nat}\ .\ x^2}}" fill="black" fontSize={60} />
+      <Latex ref={expr3} tex="F\ 2" fill="black" fontSize={60} />
+      <Latex ref={expr4} tex="{{\lambda\ a : \text{Nat}\ .\ \lambda\ b : \text{Nat}\ .\ \dfrac{a}{b}}}" fill="black" fontSize={60} />
+    </Layout>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("stlc3.1")
+
+  yield* expr1().tex("{{5}} {{\\quad : \\quad \\text{Nat}}}", 1)
+  yield* beginSlide("stlc3.2")
+
+  yield* expr2().tex("{{F = \\lambda\\ x : \\text{Nat}\\ .\\ x^2}} {{\\quad : \\quad \\text{Nat} \\rightarrow \\text{Nat}}}", 1)
+  yield* beginSlide("stlc3.3")
+
+  yield* expr3().tex("{{F\\ 2 }}{{\\quad : \\quad \\text{Nat}}}", 1)
+  yield* beginSlide("stlc3.4")
+
+  yield* expr4().tex("{{\\lambda\\ a : \\text{Nat}\\ .\\ \\lambda\\ b : \\text{Nat}\\ .\\ \\dfrac{a}{b}}} {{\\quad : \\quad \\text{Nat} \\rightarrow \\text{Nat} \\rightarrow \\mathbb{Q}}}", 1)
+  yield* beginSlide("stlc3.5")
 })
 
