@@ -1,5 +1,5 @@
-import { Code, Img, Latex, Layout, Txt } from '@motion-canvas/2d';
-import { beginSlide, createRef, fadeTransition, waitFor, map, tween, all, easeInBack, easeOutCirc, easeOutCubic, loop } from '@motion-canvas/core';
+import { Code, Img, Latex, Layout, Txt, Line, Node } from '@motion-canvas/2d';
+import { all, beginSlide, createRef, Direction, easeOutCubic, fadeTransition, slideTransition, waitFor } from '@motion-canvas/core';
 import { makeSlide } from './makeSlide';
 
 
@@ -337,3 +337,304 @@ export const stlc3 = makeSlide(null, function* (view) {
   yield* beginSlide("stlc3.5")
 })
 
+export const howard = makeSlide(null, function* (view) {
+  view.add(
+    <>
+      <Layout direction="column" alignItems="center" gap={16} layout
+
+        position={[-400, 0]}
+      >
+        <Img
+          src="/public/curry-photo.jpg"
+          width={687 * 0.6}
+          height={1024 * 0.6}
+        />
+        <Txt>Haskell Curry</Txt>
+      </Layout>
+      <Layout direction="column" alignItems="center" gap={16} layout
+
+        position={[400, 0]}
+      >
+        <Img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/William_Alvin_Howard_May_2004.jpg/250px-William_Alvin_Howard_May_2004.jpg"
+          width={450 * 1}
+          height={600 * 1}
+        />
+        <Txt>William Alvin Howard</Txt>
+      </Layout>
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("howard")
+})
+
+
+export const isomorphism1 = makeSlide(null, function* (view) {
+
+  const arrow = createRef<Latex>()
+
+  const nodeLeft = createRef<Node>()
+  const nodeRight = createRef<Node>()
+  view.add(
+    <>
+      <Layout direction="column" alignItems="center" justifyContent={"start"} gap={100} layout position={[-400, -100]}>
+        <Txt fontSize={60} fontWeight={600} position={[0, -1000]}>Zdania logiczne</Txt>
+        <Layout direction={"column"} alignItems="center" gap={100} layout>
+          <Latex
+            fill={"black"}
+            fontSize={60}
+            tex="A \implies B"
+          />
+          <Node opacity={0} ref={nodeLeft}>
+            <Latex
+              fill={"black"}
+              fontSize={60}
+              tex="A\ \&\ B"
+            />
+            <Latex
+              fill={"black"}
+              fontSize={60}
+              tex="A\ \lor\ B"
+            />
+          </Node>
+        </Layout>
+      </Layout>
+      <Line
+        points={[
+          [0, -400],
+          [0, 400],
+        ]}
+        lineWidth={8}
+        radius={8}
+        stroke={"black"}
+
+      />
+
+      <Layout direction="column" alignItems="center" justifyContent={"start"} gap={100} layout position={[400, -100]}>
+        <Txt fontSize={60} fontWeight={600} position={[0, -1000]}>Typy</Txt>
+        <Layout direction={"column"} alignItems="center" gap={100} layout>
+
+          <Latex
+            ref={arrow}
+            fill={"black"}
+            opacity={0}
+            fontSize={60}
+            tex="A \rightarrow B"
+          />
+
+          <Node opacity={0} ref={nodeRight}>
+            <Latex
+              fill={"black"}
+              fontSize={60}
+              tex="A \times B"
+            />
+
+            <Latex
+              fill={"black"}
+              fontSize={60}
+              tex="A + B"
+            />
+          </Node>
+        </Layout>
+      </Layout>
+
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("isomorphism1.0")
+
+
+  yield* arrow().opacity(1, 1)
+  yield* beginSlide("isomorphism1.1")
+
+  yield* all(
+    nodeLeft().opacity(1, 1),
+    nodeRight().opacity(1, 1)
+  )
+
+  yield* beginSlide("isomorphism1.2")
+})
+
+
+export const isomorphism2 = makeSlide(null, function* (view) {
+  const proposition = createRef<Latex>()
+
+  view.add(
+    <Latex
+      ref={proposition}
+      tex="{{A}}  {{\implies\ }} {{B  }}  {{\implies\ }} {{ A}}"
+      fill="black"
+      fontSize={60}
+    />
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("isomorphism2.0")
+
+  yield* proposition().tex("{{A}} {{\\rightarrow\\ }} {{B   }} {{\\rightarrow\\ }} {{ A}}", 1);
+  yield* beginSlide("isomorphism2.1")
+
+  yield* proposition().tex(" {{\\lambda\\ a:}}{{\\text{A}}}{{\ . \\lambda\\ b:}}{{\\text{B}}}{{\ .a}} {{\\quad : \\quad\\ }}{{A}} {{\\rightarrow\\ }} {{B   }} {{\\rightarrow\\ }} {{ A}}", 1);
+
+  yield* beginSlide("isomorphism2.2")
+
+  yield* proposition().tex(" {{\\lambda\\ a:}}{{\\text{Int}}}{{\ . \\lambda\\ b:}}{{\\text{Bool}}}{{\ .a}} {{\\quad : \\quad\\ }}{{\\text{Int}}} {{\\rightarrow\\ }} {{\\text{Bool}   }} {{\\rightarrow\\ }} {{ \\text{Int}}}", 1);
+
+  yield* beginSlide("isomorphism2.3")
+})
+
+export const systemF1 = makeSlide(null, function* (view) {
+  view.add(
+    <>
+      <Layout direction="column" alignItems="center" gap={16} layout
+
+        position={[-400, 0]}
+      >
+        <Img
+          src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Girard.jpg"
+          width={480 * 1.2}
+          height={360 * 1.2}
+        />
+        <Txt>Jean-Yves Girard</Txt>
+      </Layout>
+      <Layout direction="column" alignItems="center" gap={16} layout
+
+        position={[400, 0]}
+      >
+        <Img
+          src="/public/reynolds.jpg"
+          width={816 * 0.5}
+          height={1232 * 0.5}
+        />
+        <Txt>John C. Reynoldsa</Txt>
+      </Layout>
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("systemf.0")
+})
+
+export const systemF2 = makeSlide(null, function* (view) {
+
+  const lambda = createRef<Latex>()
+  const app = createRef<Latex>()
+  view.add(
+    <>
+      <Layout layout direction={"column"} alignItems={"center"} gap={100} >
+
+        <Txt fontSize={60} fontWeight={600}>System F</Txt>
+        <Latex
+          ref={lambda}
+          tex="{{id = \Lambda\ A .\ \lambda\ x:A\ . x}}"
+          fontSize={60}
+          fill={"black"}
+        />
+
+        <Latex
+          ref={app}
+          tex="id [\text{Int}]"
+          fontSize={60}
+          fill={"black"}
+        />
+
+      </Layout>
+
+    </>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("systemf2.0")
+
+  yield* lambda().tex("{{id = \\Lambda\\ A .\\ \\lambda\\ x:A\\ . x}} {{ \\quad : \\quad \\forall A . A \\rightarrow A }}", 1)
+  yield* beginSlide("systemf2.1")
+
+  yield* app().tex("{{id [\\text{Int}]}}{{\\quad : \\quad \\text{Int} \\rightarrow \\text{Int} }}", 1)
+
+  yield* beginSlide("systemf2.2")
+})
+
+export const proof1 = makeSlide(null, function* (view) {
+  const lambda = createRef<Latex>()
+  view.add(
+    <>
+      <Latex
+        ref={lambda}
+        tex="{{\lambda\ a:\text{A}.\lambda\ b:\text{B}.a}}"
+        fill={"black"}
+        fontSize={60}
+      />
+    </>
+  )
+
+  yield* slideTransition(Direction.Left, 0.5)
+  yield* beginSlide("proof1.0")
+
+  yield* lambda().tex("{{\\Lambda\\ \\text{A}. \\Lambda\\ \\text{B}.}}{{\\lambda\\ a:\\text{A}.\\lambda\\ b:\\text{B}.a}}", 1)
+
+  yield* beginSlide("proof1.1")
+
+  yield* lambda().tex("{{\\Lambda\\ \\text{A}. \\Lambda\\ \\text{B}.}}{{\\lambda\\ a:\\text{A}.\\lambda\\ b:\\text{B}.a}}{{\\quad : \\quad \\forall \\text{A}. \\forall \\text{B}. \\text{A} \\rightarrow \\text{B} \\rightarrow \\text{A}}}", 1)
+
+  yield* beginSlide("proof1.2")
+})
+
+
+export const proof2 = makeSlide(null, function* (view) {
+  const proposition = createRef<Latex>()
+  const proof = createRef<Latex>()
+
+  view.add(
+    <Layout layout alignItems={"center"} direction={"column"} gap={100}>
+      <Latex
+        ref={proposition}
+        tex="{{(A}} {{\implies\ }} {{B)}} {{\implies\ }} {{(B}} {{\implies\ }} {{C)}} {{\implies\ }} {{A}} {{\implies\ }} {{C}}"
+        fill={"black"}
+        fontSize={60}
+      />
+
+      <Latex
+        ref={proof}
+        tex="{{\Lambda\ \text{A}. \Lambda\ \text{B}. \Lambda\ \text{C}.}}"
+        fill={"black"}
+        fontSize={60}
+        opacity={0}
+      />
+    </Layout>
+  )
+
+  yield* fadeTransition(0.5);
+  yield* beginSlide("proof2.0")
+
+  yield* proposition().tex("{{(A}} {{\\rightarrow\\ }} {{B)}} {{\\rightarrow\\ }} {{(B}} {{\\rightarrow\\ }} {{C)}} {{\\rightarrow\ }} {{A}} {{\\rightarrow\\ }} {{C}}", 1)
+  yield* beginSlide("proof2.1")
+
+
+
+  yield* proof().opacity(100, 1)
+  yield* beginSlide("proof2.2")
+
+  yield* proof().tex("{{\\Lambda\\ \\text{A}. \\Lambda\\ \\text{B}. \\Lambda\\ \\text{C}.}}{{\\lambda ab : (A \\rightarrow B).}}", 1)
+
+
+  yield* beginSlide("proof2.3")
+
+  yield* proof().tex("{{\\Lambda\\ \\text{A}. \\Lambda\\ \\text{B}. \\Lambda\\ \\text{C}.}}{{\\lambda ab : (A \\rightarrow B).}} {{\\lambda bc : (B \\rightarrow C).}} ", 1)
+  yield* beginSlide("proof2.4")
+
+  yield* proof().tex("{{\\Lambda\\ \\text{A}. \\Lambda\\ \\text{B}. \\Lambda\\ \\text{C}.}}{{\\lambda ab : (A \\rightarrow B).}} {{\\lambda bc : (B \\rightarrow C).}} {{\\lambda\ a:A.}}", 1)
+  yield* beginSlide("proof2.5")
+
+
+  yield* proof().tex("{{\\Lambda\\ \\text{A}. \\Lambda\\ \\text{B}. \\Lambda\\ \\text{C}.}}{{\\lambda ab : (A \\rightarrow B).}} {{\\lambda bc : (B \\rightarrow C).}} {{\\lambda\ a:A.}} {{bc\\ (ab\\ a)}}", 1)
+  yield* beginSlide("proof2.6")
+})
+
+
+export const koniec = makeSlide("koniec", function* (view) {
+  view.add(
+    <Txt fontSize={500}>Koniec</Txt>
+  )
+})
