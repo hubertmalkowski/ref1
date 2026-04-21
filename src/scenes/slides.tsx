@@ -36,7 +36,7 @@ export const voevodsky = makeSlide("voevodsky", function* (view) {
 
 
 export const sylogizm = makeSlide(null, function* (view) {
-  const codeNode = createRef<Code>();
+  const codeNode = createRef<Latex>();
 
   view.add(
     <Layout direction="column" alignItems="center" gap={100} layout>
@@ -47,12 +47,12 @@ export const sylogizm = makeSlide(null, function* (view) {
           fill="black"
         />
       </Layout>
-      <Code
+      <Latex
         ref={codeNode}
-        code={"fun ab -> fun bc -> fun a -> bc (ab a) ;;"}
+        tex="\Lambda\ \text{A}. \Lambda\ \text{B}. \Lambda \text{C}. \lambda\ ab : (\text{A} \rightarrow \text{B}) . \lambda\ bc : (\text{B} \rightarrow \text{C}). \lambda\ a:\text{A. bc (ab a)}"
+        fontSize={50}
+        fill={"black"}
         opacity={0}
-        fontSize={60}
-        fill="gray"
       />
     </Layout>
   );
