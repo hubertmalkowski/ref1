@@ -6,10 +6,16 @@ import { makeSlide } from './makeSlide';
 
 export const title = makeSlide("title", function* (view) {
   view.add(
-    <Layout direction={"column"} alignItems={"center"} gap={16} layout>
-      <Txt fontWeight={600} fontSize={60}>Czy program to dowód matematyczny?</Txt>
-      <Txt fontSize={30}>Logiczne podstawy teorii typów</Txt>
-    </Layout>
+    <>
+
+      <Layout direction={"column"} alignItems={"center"} gap={16} layout>
+        <Txt fontWeight={600} fontSize={60}>Czy program to dowód matematyczny?</Txt>
+        <Txt fontSize={30}>Logiczne podstawy teorii typów</Txt>
+      </Layout>
+      <Txt fontSize={30} position={[0, 200]}>Hubert Małkowski</Txt>
+      <Img src={"/public/mathup.png"} size={[851 * 0.5, 315 * .5]} position={[0, 400]} radius={12} />
+    </>
+
   )
 })
 
@@ -201,16 +207,12 @@ export const lambda2 = makeSlide(null, function* (view) {
   yield* beginSlide("lambda2.3")
 
   yield* apply().tex("{{(}} {{\\lambda x.}} {{(}}{{\\lambda n.}} {{n}}{{^2 + 1}}{{)}}\\ {{x}} {{)\\ }} {{2}} ", 1)
+
+  yield* beginSlide("lambda2.4")
+
   yield* apply().tex(" {{(}}{{\\lambda n.}} {{n}}{{^2 + 1}}{{)}}\\ {{2}} ", 1)
   yield* apply().tex(" {{2}}{{^2 + 1}}", 1)
   yield* apply().tex(" {{2}}{{^2 + 1}}{{\\rightsquigarrow 5}}", 1)
-  yield* beginSlide("lambda2.4")
-
-  yield* apply().tex("{{\\text{apply}}} = {{\\lambda f.}} {{\\lambda x.}} {{f}}\ {{x}}", 1)
-  yield* all(
-    result().opacity(100, 0.5),
-    apply().y(0, 0).to(-100, 0.5),
-  )
   yield* beginSlide("lambda2.5")
 })
 
@@ -635,6 +637,26 @@ export const proof2 = makeSlide(null, function* (view) {
 
 export const koniec = makeSlide("koniec", function* (view) {
   view.add(
-    <Txt fontSize={500}>Koniec</Txt>
+    <>
+      <Layout layout justifyContent={"space-around"}>
+        <Layout layout direction={"column"} gap={400}>
+
+          <Layout layout direction={"column"} >
+            <Txt fontSize={50} fontWeight={600}>Hubert Małkowski</Txt>
+            <Txt fontSize={30}>261484@edu.p.lodz.pl</Txt>
+          </Layout>
+
+          <Layout layout direction={"column"} gap={8} alignItems={"start"}>
+            <Txt fontSize={50} fontWeight={600}>Źródła</Txt>
+            <Txt fontSize={30}>Types and Programming Languages - Benjamin C. Pierce (2002)</Txt>
+            <Txt fontSize={30}>Type Theory and Formal Proof - Rob Nederpelt, Herman Guevers (2014)</Txt>
+            <Txt fontSize={30}>The Origins and Motivations of Univalent Foundations- Vladimir Voedovsky (2014)</Txt>
+            <Txt fontSize={30}>Propositions as Types - Philip Wadler (2014)</Txt>
+          </Layout>
+        </Layout>
+        <Img src={"/public/mathup.png"} size={[851 * 0.5, 315 * .5]} position={[0, 400]} radius={12} />
+
+      </Layout>
+    </>
   )
 })
